@@ -50,10 +50,10 @@ class User {
       WHERE username = $1`,
         [username]
       );
-      if (result.rows.length === 0) {
+      if (result.rowCount === 0) {
         throw new ExpressError(`No username '${username} exists`, 404);
       }
-      return result.rows[0];
+      
     } catch (err) {
       throw new ExpressError("Updating login timestamp failed", 500);
     }
@@ -89,7 +89,7 @@ class User {
         WHERE username = $1`,
         [username]
       );
-      if (result.rows.length === 0) {
+      if (result.rowCount === 0) {
         return new ExpressError(`No user could be found for ${username}.`, 404);
       }
       return result.rows[0];

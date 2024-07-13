@@ -38,6 +38,7 @@ router.post('/register', async function(req, res, next) {
         const user = await User.register({ username, password, first_name, last_name, phone });
         if (user) {
             let token = jwt.sign({ username }, SECRET_KEY);
+            
             return res.json({ token });
         } else {
             throw new ExpressError("Registration failed", 400);
@@ -45,6 +46,6 @@ router.post('/register', async function(req, res, next) {
     } catch (err) {
         return next(err);
     }
-})
+});
 
 module.exports = router;

@@ -42,8 +42,6 @@ function ensureCorrectUser(req, res, next) {
 }
 // end
 
-module.exports = {
-  authenticateJWT,
-  ensureLoggedIn,
-  ensureCorrectUser
-};
+module.exports.authenticateJWT = authenticateJWT;
+module.exports.ensureLoggedIn = ensureLoggedIn;
+module.exports.ensureCorrectUser = ensureCorrectUser;
