@@ -50,6 +50,9 @@ class User {
       WHERE username = $1`,
         [username]
       );
+      if (result.rows.length === 0) {
+        throw new ExpressError(`No username '${username} exists`, 404);
+      }
       return result.rows[0];
     } catch (err) {
       throw new ExpressError("Updating login timestamp failed", 500);
@@ -112,6 +115,9 @@ class User {
         WHERE m.from_username = $1`,
         [username]
       );
+      if (results.rows.length === 0) {
+        throw new ExpressError(`No username '${username} exists`, 404);
+      }
       return results.rows.map((row) => ({
         id: row.id,
         to_user: {
@@ -149,6 +155,9 @@ class User {
        WHERE m.to_username = $1`,
         [username]
       );
+      if (results.rows.length === 0) {
+        throw new ExpressError(`Username '${username} doesn't exist`, 404);
+      }
 
       return results.rows.map((row) => ({
         id: row.id,
