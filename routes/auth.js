@@ -19,7 +19,7 @@ router.post('/login', async function(req, res, next) {
             User.updateLoginTimestamp(username);
             return res.json({ token });
         } else {
-            throw new ExpressError("Invalid username/password", 404);
+            throw new ExpressError("Invalid username/password", 400);
         }
     } catch (err) {
         return next(err);
